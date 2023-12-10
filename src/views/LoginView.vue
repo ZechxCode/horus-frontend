@@ -28,34 +28,34 @@ function toggleRegister() {
                         <LoginForm :toggle="toggleRegister" />
                     </div>
                     <!-- {/* right side */} -->
-                    <Transition name="slide-fade">
-                        <div class="relative" v-if="isMenuHidden">
-                            <RegisterForm />
-                        </div>
-                    </Transition>
-                    <Transition>
-                        <div class="relative" v-if="isMenuHidden2">
-                            <hr class="drop-shadow-sm">
-                            <div
-                                class="rounded-r-2xl w-[440px] h-full pl-10 p-6 bg-white rounded bottom-10 right-6 md:drop-shadow-lg md:block">
-                                <p class="text-xl text-center underline">Ujian Masuk Horus</p><br><br>
-                                <span class="text-xl font-bold text-gray-500">Muhammad | Fullstack Web
-                                    Developer
-                                </span>
+                    <!-- <Transition name="slide-fade"> -->
+                    <div class="relative" v-if="isMenuHidden">
+                        <RegisterForm />
+                    </div>
+                    <!-- </Transition> -->
+                    <!-- <Transition> -->
+                    <div class="relative" v-if="isMenuHidden2">
+                        <hr class="drop-shadow-sm">
+                        <div
+                            class="rounded-r-2xl w-[440px] h-full pl-10 p-6 bg-white rounded bottom-10 right-6 md:drop-shadow-lg md:block">
+                            <p class="text-xl text-center underline">Ujian Masuk Horus</p><br><br>
+                            <span class="text-xl font-bold text-gray-500">Muhammad | Fullstack Web
+                                Developer
+                            </span>
+                            <br>
+                            <br>
+                            <span class="text-xl text-gray-500">
+                                Website ini Terbagi Menjadi 2 yaitu :
                                 <br>
                                 <br>
-                                <span class="text-xl text-gray-500">
-                                    Website ini Terbagi Menjadi 2 yaitu :
-                                    <br>
-                                    <br>
-                                    <li>VueJs Sebagai Frontend</li>
-                                    <li>Laravel Sebagai Backend</li>
+                                <li>VueJs Sebagai Frontend</li>
+                                <li>Laravel Sebagai Backend</li>
 
-                                    <br>Menggunakan TailwindCss sebagai Styling Framework
-                                </span>
-                            </div>
+                                <br>Menggunakan TailwindCss sebagai Styling Framework
+                            </span>
                         </div>
-                    </Transition>
+                    </div>
+                    <!-- </Transition> -->
                 </div>
             </div>
         </div>
