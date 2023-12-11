@@ -2,8 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-import Nav from '../src/components/layout/Nav.vue'
+import Nav from './components/layout/Nav1.vue'
 import Sidebar from '../src/components/layout/Sidebar.vue'
+
 </script>
 
 <template>

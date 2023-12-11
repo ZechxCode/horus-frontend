@@ -90,20 +90,21 @@ const router = createRouter({
       name: "login",
       component: () => import("../views/LoginView.vue"),
       meta: {
-        requiresLayout: false, // Rute ini tidak memerlukan layout
+        requiresLayout: false,
+        // Rute ini tidak memerlukan layout
       },
     },
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const userStore = useUserStore();
-  if (to.meta.requiresAuth && !userStore.isLoggedIn) {
-    // Redirect to login page if not authenticated
-    next({ name: 'login' });
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const userStore = useUserStore();
+//   if (to.meta.requiresAuth && !userStore.isLoggedIn) {
+//     // Redirect to login page if not authenticated
+//     next({ name: 'login' });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router

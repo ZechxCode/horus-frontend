@@ -12,6 +12,7 @@ function toggleRegister() {
     isMenuHidden2.value = !isMenuHidden2.value;
 }
 
+
 </script>
 
 <template>

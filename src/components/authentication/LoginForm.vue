@@ -25,11 +25,11 @@ async function login() {
             password: form.value.password,
 
         })
-        console.log('Login successful:', response.data);
         localStorage.setItem('access_token', response.data.data.access_token)
         localStorage.setItem('token_type', response.data.data.token_type)
 
         userStore.fetchUser()
+        console.log('Login successful:', response.data);
         router.push('/')
     } catch (error) {
         console.error('Login Failed', error)

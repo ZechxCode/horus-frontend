@@ -1,8 +1,9 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
+import { useUserStore } from "@/stores/user";
 
-import VoucherCard from "../components/voucher/VoucherCard.vue"
+import TableHistory from "../components/voucher/TableHistory.vue"
 
 
 
@@ -16,19 +17,23 @@ async function getVoucherData() {
     } catch (error) {
         console.error(error)
     }
-
-
 }
 
+
+
+const userStore = useUserStore()
+const getUser = computed(() => userStore.getUser)
+const isLoggedin = computed(() => userStore.isLoggedIn)
+
 onMounted(() => {
-    getVoucherData()
+    getVoucherData(), userStore.fetchUser()
 })
 
 
 </script>
 
 <template>
-    <div class="container">
+    <div v-if="isLoggedin" class="container">
         <h2 class="mb-5 text-3xl font-bold text-left text-red-600 dark:text-black">{{ voucher.length }} voucher claimed</h2>
         <div v-if="voucher && voucher.length" class="">
             <div class="container mx-auto mt-5 px-auto">
@@ -48,41 +53,8 @@ onMounted(() => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="voc in voucher" :key="voc.id" class="bg-white border-b">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <!-- SVG content for icon -->
-                                            </svg>
-                                        </div>
-                                        {{ voc.nama }}
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <!-- SVG content for icon -->
-                                            </svg>
-                                        </div>
-                                        {{ voc.kategori }}
-                                    </div>
-                                </td>
-                                <td class="flex items-center justify-center px-6 py-4">
-                                    <button
-                                        class="flex items-center px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-500 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <!-- SVG content for remove icon -->
-                                        </svg>
-                                        Remove
-                                    </button>
-                                </td>
-
-                            </tr>
+                            <TableHistory v-for="voc in voucher" :key="voc.id" :id="voc.id" :nama="voc.nama"
+                                :kategori="voc.kategori" :foto="voc.foto" :getVoc="getVoucherData" />
                             <!-- Duplicate the tr above for every row you need -->
                         </tbody>
                     </table>
@@ -95,6 +67,9 @@ onMounted(() => {
             <p>Data voucher tidak tersedia.</p>
         </div>
 
+    </div>
+    <div v-else class="text-center">
+        <p>Data voucher tidak tersedia. Silahkan Klik Login Di Kanan Atas</p>
     </div>
 </template>
 
